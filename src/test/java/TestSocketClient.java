@@ -12,14 +12,13 @@ import java.net.URISyntaxException;
 // user2 WyI1NzM1N2E5YjY3YjYwYjEwODNiMDk2MzIiLCI2MmFjZGY1OTYxNDE5ZDY3N2Q1NjAyM2FlOTAwYjhhZSJd.ChcMgA.7x4kQijpr_GIYNoGtxBuUGpDSqU
 public class TestSocketClient {
     public static void main(String[] args) throws URISyntaxException {
-        WebsocketClient client = new WebsocketClient("http://192.168.0.4:8080", "WyI1NzM1N2E5YjY3YjYwYjEwODNiMDk2MzEiLCIxMzVjZTIwM2ZkMTkyY2JiZTUyNzBmMTQ5NmQ3YWY1MSJd.ChcM2g.4tz9i6M9AtqOAqY7H0FDXoVKz7U", true);
+        final WebsocketClient client = new WebsocketClient("http://192.168.0.4:8080", "WyI1NzM1N2E5YjY3YjYwYjEwODNiMDk2MzEiLCIxMzVjZTIwM2ZkMTkyY2JiZTUyNzBmMTQ5NmQ3YWY1MSJd.ChcM2g.4tz9i6M9AtqOAqY7H0FDXoVKz7U", true);
 
         JSONObject object = new JSONObject();
         object.put("to_id", "57357a9b67b60b1083b09632");
         client.emit("request new partner", object);
 
         client.on("ret:request new partner", new Emitter.Listener() {
-            @Override
             public void call(Object... args) {
                 JSONObject ret = (JSONObject)args[0];
                 System.out.println(ret);
