@@ -74,5 +74,12 @@ public class TestSocketClient {
         client.emit("request new partner", object);
 
         client.connect();
+
+        System.out.println("hello");
+        System.out.println("hello");
+        System.out.println("hello");
+        System.out.println("hello");
+        System.out.println("hello");
+        System.out.println("hello");
     }
 }
