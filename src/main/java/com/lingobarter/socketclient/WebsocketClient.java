@@ -15,11 +15,24 @@ import java.net.URISyntaxException;
 public class WebsocketClient {
     private Socket socket;
 
-    public WebsocketClient(String url, String authToken, boolean reconnection) throws URISyntaxException {
+    public WebsocketClient(String url, String authToken, boolean reconnection, final CallbackPool pool) throws URISyntaxException {
         IO.Options opts = new IO.Options();
         opts.reconnection = reconnection;
         opts.query = "auth_token=" + authToken;
         this.socket = IO.socket(url, opts);
+
+        this.on("ret:request new partner", new Emitter.Listener() {
+            public void call(Object... args) {
+                pool.onRequestNewParter((JSONObject)args[0]);
+            }
+        });
+
+        this.on("new partner request", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                pool.onNewPartnerRequest((JSONObject)args[0]);
+            }
+        });
     }
 
     public void requestNewParter(String to_id) {
