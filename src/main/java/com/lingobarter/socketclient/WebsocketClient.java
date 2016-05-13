@@ -28,11 +28,80 @@ public class WebsocketClient {
         });
 
         this.on("new partner request", new Emitter.Listener() {
-            @Override
             public void call(Object... args) {
                 pool.onNewPartnerRequest((JSONObject)args[0]);
             }
         });
+
+        this.on("ret:add partner", new Emitter.Listener() {
+            public void call(Object... args) {
+                pool.onAddPartner((JSONObject)args[0]);
+            }
+        });
+
+        this.on("partner add", new Emitter.Listener() {
+            public void call(Object... args) {
+                pool.onPartnerAdd((JSONObject)args[0]);
+            }
+        });
+
+        this.on("ret:reject partner", new Emitter.Listener() {
+            public void call(Object... args) {
+                pool.onRejectPartner((JSONObject)args[0]);
+            }
+        });
+
+        this.on("partner reject", new Emitter.Listener() {
+            public void call(Object... args) {
+                pool.onPartnerReject((JSONObject)args[0]);
+            }
+        });
+
+        this.on("ret:browse requests", new Emitter.Listener() {
+            public void call(Object... args) {
+                pool.onBrowseRequests((JSONObject)args[0]);
+            }
+        });
+
+        this.on("ret:browse partners", new Emitter.Listener() {
+            public void call(Object... args) {
+                pool.onBrowsePartners((JSONObject)args[0]);
+            }
+        });
+
+        this.on("ret:browse chats", new Emitter.Listener() {
+            public void call(Object... args) {
+                pool.onBrowseChats((JSONObject)args[0]);
+            }
+        });
+
+        this.on("ret:send message", new Emitter.Listener() {
+            public void call(Object... args) {
+                pool.onSendMessage((JSONObject)args[0]);
+            }
+        });
+
+        this.on("message send", new Emitter.Listener() {
+            public void call(Object... args) {
+                pool.onMessageSend((JSONObject)args[0]);
+            }
+        });
+
+        this.on("ret:browse messages", new Emitter.Listener() {
+            public void call(Object... args) {
+                pool.onBrowseMessages((JSONObject)args[0]);
+            }
+        });
+
+        this.on("ret:fetch undelivered messages", new Emitter.Listener() {
+            public void call(Object... args) {
+                pool.onFetchUndeliveredMessages((JSONObject)args[0]);
+            }
+        });
+
+
+
+
     }
 
     public void requestNewParter(String to_id) {
